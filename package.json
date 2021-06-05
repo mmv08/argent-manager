@@ -10,9 +10,12 @@
     "postinstall": "yarn gen-types"
   },
   "dependencies": {
-    "@emotion/react": "11.4.0",
-    "@emotion/styled": "11.3.0",
+    "@chakra-ui/react": "^1.6.3",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "bnc-onboard": "^1.26.1",
     "ethers": "^5.1.4",
+    "framer-motion": "^4",
     "mkdirp": "^1.0.4",
     "next": "10.2.3",
     "next-themes": "^0.0.14",
