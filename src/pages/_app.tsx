@@ -2,12 +2,13 @@ import { ThemeProvider } from "next-themes"
 import Head from "next/head"
 import { AppProps } from "next/app"
 import { ChakraProvider } from "@chakra-ui/react"
-import { WalletProvider } from "src/stores/wallet"
+import { WalletProvider } from "src/stores/walletProvider"
+import { extendedTheme } from "src/styles/theme"
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   return (
     <ThemeProvider>
-      <ChakraProvider>
+      <ChakraProvider theme={extendedTheme}>
         <WalletProvider>
           <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
