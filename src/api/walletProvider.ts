@@ -1,13 +1,14 @@
 import Onboard from "bnc-onboard"
-
-const infuraKey = process.env.NEXT_PUBLIC_INFURA_KEY
+import { ALCHEMY_RPC_URL } from "src/utils/constants"
 
 const wallets = [
   { walletName: "metamask", preferred: true },
   {
     walletName: "walletConnect",
     preferred: true,
-    infuraKey,
+    rpc: {
+      1: ALCHEMY_RPC_URL,
+    },
   },
   { walletName: "trust", preferred: true },
 ]

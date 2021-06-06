@@ -1,6 +1,7 @@
 import React from "react"
 import { Flex, Center, Input, Heading, Button } from "@chakra-ui/react"
 import { isArgentWallet } from "src/contracts/v2.5.0/api/walletDetector"
+import { getAlchemyProvider } from "src/api/rpcProviders"
 
 function LoadPage(): React.ReactElement {
   const [error, setError] = React.useState("")
@@ -10,7 +11,8 @@ function LoadPage(): React.ReactElement {
 
     // @ts-expect-error we're accessing the value by input's name, but ts is not happy with it
     const walletAddress: string = event.target.address.value
-    const addressIsWallet = await isArgentWallet(walletAddress)
+    const alchemyProvider = getAlchemyProvider()
+    const addressIsWallet = await isArgentWallet(alchemyProvider, walletAddress)
     if (!addressIsWallet) {
       setError("The address doesn't look like an Argent wallet")
       return

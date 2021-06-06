@@ -4,10 +4,14 @@ import { ArgentWalletDetector } from "../types/ArgentWalletDetector.d"
 import { WALLET_DETECTOR_ADDRESS } from "../addresses"
 
 function getDetector(provider: ethers.providers.BaseProvider): ArgentWalletDetector {
-  return new ethers.Contract(WALLET_DETECTOR_ADDRESS, ArgentWalletDetectorArtifact.abi) as ArgentWalletDetector
+  return new ethers.Contract(
+    WALLET_DETECTOR_ADDRESS,
+    ArgentWalletDetectorArtifact.abi,
+    provider,
+  ) as ArgentWalletDetector
 }
 
-async function isArgentWallet(address: string, provider: ethers.providers.BaseProvider): Promise<boolean> {
+async function isArgentWallet(provider: ethers.providers.BaseProvider, address: string): Promise<boolean> {
   const detector = getDetector(provider)
   const addressIsWallet = await detector.isArgentWallet(address)
 
