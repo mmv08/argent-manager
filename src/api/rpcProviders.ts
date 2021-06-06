@@ -1,8 +1,8 @@
 import { ethers } from "ethers"
-import { ALCHEMY_RPC_URL } from "src/utils/constants"
+import { ALCHEMY_API_KEY } from "src/utils/constants"
 
 function getAlchemyProvider(): ethers.providers.BaseProvider {
-  return ethers.getDefaultProvider(ALCHEMY_RPC_URL)
+  return new ethers.providers.AlchemyProvider(1, ALCHEMY_API_KEY)
 }
 
 export { getAlchemyProvider }

@@ -1,24 +1,39 @@
 import React from "react"
-import { Flex, Center, Input, Heading, Button } from "@chakra-ui/react"
+import { useRouter } from "next/router"
+import { Flex, Center, Input, Heading, Button, Text } from "@chakra-ui/react"
 import { isArgentWallet } from "src/contracts/v2.5.0/api/walletDetector"
 import { getAlchemyProvider } from "src/api/rpcProviders"
+import { isValidAddress } from "src/utils/addresses"
+import { isValidEnsName } from "src/utils/ens"
 
 function LoadPage(): React.ReactElement {
   const [error, setError] = React.useState("")
+  const [validating, setValidating] = React.useState(false)
+  const router = useRouter()
 
   const onSubmit = async (event: React.FormEvent<Element>) => {
     event.preventDefault()
+    setError("")
+    setValidating(true)
 
     // @ts-expect-error we're accessing the value by input's name, but ts is not happy with it
     const walletAddress: string = event.target.address.value
-    const alchemyProvider = getAlchemyProvider()
-    const addressIsWallet = await isArgentWallet(alchemyProvider, walletAddress)
-    if (!addressIsWallet) {
-      setError("The address doesn't look like an Argent wallet")
-      return
-    }
+    try {
+      const alchemyProvider = getAlchemyProvider()
+      const stringIsEnsOrAddress = isValidAddress(walletAddress) || isValidEnsName(walletAddress)
+      const addressIsWallet = stringIsEnsOrAddress && (await isArgentWallet(alchemyProvider, walletAddress))
 
-    console.log("Cool, its a wallet")
+      if (!addressIsWallet) {
+        throw new Error("Failed to check if address is argent wallet")
+      }
+
+      router.push("/wallets/" + walletAddress)
+    } catch (error) {
+      console.error(error)
+      setError("The address doesn't look like an Argent wallet")
+    } finally {
+      setValidating(false)
+    }
   }
 
   return (
@@ -27,10 +42,13 @@ function LoadPage(): React.ReactElement {
         <Heading as="h1" size="2xl" mb="0.5em">
           Load a wallet
         </Heading>
-        <Input width="80%" name="address" variant="filled" placeholder="Address or ENS name" mb="1em" isRequired />
-        <Button type="submit" width="30%" colorScheme="orange">
-          Continue
-        </Button>
+        <Input width="90%" name="address" variant="filled" placeholder="Address or ENS name" mb="1em" isRequired />
+        <Flex align="center">
+          <Button isLoading={validating} type="submit" width="30%" colorScheme="orange" mr="0.5em">
+            Continue
+          </Button>
+          <Text color="red.400">{error}</Text>
+        </Flex>
       </Flex>
     </Center>
   )
