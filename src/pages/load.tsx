@@ -17,19 +17,21 @@ function LoadPage(): React.ReactElement {
     setValidating(true)
 
     // @ts-expect-error we're accessing the value by input's name, but ts is not happy with it
-    const walletAddress: string = event.target.address.value
+    const walletAddress: string = event.target.elements.address.value
     try {
       const alchemyProvider = getAlchemyProvider()
       const stringIsEnsOrAddress = isValidAddress(walletAddress) || isValidEnsName(walletAddress)
       const addressIsWallet = stringIsEnsOrAddress && (await isArgentWallet(alchemyProvider, walletAddress))
 
       if (!addressIsWallet) {
-        throw new Error("Failed to check if address is argent wallet")
+        throw new Error("☹️")
       }
 
       router.push("/wallets/" + walletAddress)
     } catch (error) {
-      console.error(error)
+      if (error.message !== "☹️") {
+        console.error(error)
+      }
       setError("The address doesn't look like an Argent wallet")
     } finally {
       setValidating(false)
