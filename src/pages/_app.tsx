@@ -4,6 +4,7 @@ import { AppProps } from "next/app"
 import { ChakraProvider } from "@chakra-ui/react"
 import { WalletProvider } from "src/stores/walletProvider"
 import { extendedTheme } from "src/styles/theme"
+import { Layout } from "src/components/Layout"
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   return (
@@ -21,8 +22,9 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
             <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32" />
             <meta name="theme-color" content="#fff" />
           </Head>
-
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </WalletProvider>
       </ChakraProvider>
     </ThemeProvider>

@@ -39,8 +39,8 @@ function LoadPage(): React.ReactElement {
   }
 
   return (
-    <Center w="100vw" h="100vh">
-      <Flex direction="column" flex={{ base: "0.95", md: "0.6", lg: "0.3" }} as="form" onSubmit={onSubmit}>
+    <Center w="100%" h="calc(100vh - 132px)">
+      <Flex direction="column" flex={{ base: "0.95", md: "0.6", lg: "0.6" }} as="form" onSubmit={onSubmit}>
         <Heading as="h1" size="2xl" mb="0.5em">
           Load a wallet
         </Heading>
