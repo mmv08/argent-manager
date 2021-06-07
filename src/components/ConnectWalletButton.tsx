@@ -19,14 +19,7 @@ const ConnectWalletButton = (properties: ButtonProps): React.ReactElement => {
   }, [connectProvider])
 
   return (
-    <Button
-      color="primary"
-      type="button"
-      onClick={handleProviderConnect}
-      variant="contained"
-      disabled={disabled}
-      {...properties}
-    >
+    <Button type="button" onClick={handleProviderConnect} disabled={disabled} {...properties}>
       Connect
     </Button>
   )

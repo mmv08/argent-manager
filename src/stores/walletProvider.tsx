@@ -12,7 +12,7 @@ type ProviderState = ProviderInfo & {
   fetchAndSetProvider: (provider: Web3Provider) => Promise<void>
   disconnect: () => void
   updateProvider: () => void
-  connectProvider: () => void
+  connectProvider: (name?: string) => void
 }
 
 function initializeStore() {
@@ -22,10 +22,10 @@ function initializeStore() {
     provider: undefined,
     signer: undefined,
 
-    connectProvider: async () => {
+    connectProvider: async (name?: string) => {
       const { updateProvider, disconnect, fetchAndSetProvider } = get()
 
-      const connection = await connectToProvider()
+      const connection = await connectToProvider(name)
 
       const provider = new Web3Provider(connection, 1)
 
@@ -38,6 +38,7 @@ function initializeStore() {
 
     fetchAndSetProvider: async (provider: Web3Provider) => {
       const account = (await provider.listAccounts())[0]
+
       if (!account) {
         return
       }

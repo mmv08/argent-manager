@@ -3007,10 +3007,10 @@ bn.js@^5.0.0, bn.js@^5.1.1, bn.js@^5.1.2, bn.js@^5.2.0:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-5.2.0.tgz#358860674396c6997771a9d051fcc1b57d4ae002"
   integrity sha512-D7iWRBvnZE8ecXiLj/9wbxH7Tk79fAh8IHaTNq1RWRixsS02W+5qS+iE9yq6RYl0asXx5tw0bLhmT5pIfbSquw==
 
-bnc-onboard@^1.26.1:
-  version "1.26.1"
-  resolved "https://registry.yarnpkg.com/bnc-onboard/-/bnc-onboard-1.26.1.tgz#9ca6c3205d935c68dabd47dca20043d3c75b56e9"
-  integrity sha512-jXzw4QV0lgUa0YQqPIsrXceBKCLbJN6kQrxJMBl/itmg8lfhTDWiUKX45qaQ6hWfxNj8JEb7ULCfoG/UHHL51w==
+bnc-onboard@^1.27.0:
+  version "1.27.0"
+  resolved "https://registry.yarnpkg.com/bnc-onboard/-/bnc-onboard-1.27.0.tgz#ccaf00bbd00681331ea62197660f3d033dccd7d8"
+  integrity sha512-Tr4zeJLIZ5KuyPaRxGJhznzZVOeQX/yU1ZfnpNw9YIjzsFjtn8ulgMNLFgCe2DW+PcmNV/UulSq/e9/zd7BQtw==
   dependencies:
     "@cvbb/eth-keyring" "^1.1.0"
     "@gnosis.pm/safe-apps-provider" "^0.3.0"
