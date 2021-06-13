@@ -5,10 +5,12 @@ import { ChakraCustomProvider, getServerSideProps } from "src/styles/ChakraCusto
 import { WalletProvider } from "src/stores/walletProvider"
 import { Layout } from "src/components/Layout"
 
-function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
+type MyAppProperties = AppProps & { cookies: string }
+
+function MyApp({ Component, pageProps, cookies }: MyAppProperties): React.ReactElement {
   return (
     <ThemeProvider>
-      <ChakraCustomProvider>
+      <ChakraCustomProvider cookies={cookies}>
         <WalletProvider>
           <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
