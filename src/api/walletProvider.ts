@@ -29,7 +29,6 @@ const onboard = Onboard({
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function connectToProvider(name?: string): Promise<any> {
-  console.log({ name })
   const walletSelect = await onboard.walletSelect(name)
 
   if (walletSelect) {

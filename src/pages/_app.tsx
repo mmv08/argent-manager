@@ -1,15 +1,14 @@
 import { ThemeProvider } from "next-themes"
 import Head from "next/head"
 import { AppProps } from "next/app"
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraCustomProvider, getServerSideProps } from "src/styles/ChakraCustomProvider"
 import { WalletProvider } from "src/stores/walletProvider"
-import { extendedTheme } from "src/styles/theme"
 import { Layout } from "src/components/Layout"
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   return (
     <ThemeProvider>
-      <ChakraProvider theme={extendedTheme}>
+      <ChakraCustomProvider>
         <WalletProvider>
           <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,9 +25,11 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
             <Component {...pageProps} />
           </Layout>
         </WalletProvider>
-      </ChakraProvider>
+      </ChakraCustomProvider>
     </ThemeProvider>
   )
 }
+
+export { getServerSideProps }
 
 export default MyApp
