@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons"
-import { Box, Flex, Text, TextProps, Heading, Button, useColorMode, useBoolean, Icon } from "@chakra-ui/react"
+import { Box, Flex, Text, TextProps, Heading, Button, useColorMode, useBoolean } from "@chakra-ui/react"
 import { ConnectWalletButton } from "src/components/ConnectWalletButton"
 import { useWalletProviderStore } from "src/stores/walletProvider"
 import { shortenText } from "src/utils/strings"
@@ -39,7 +39,7 @@ function Header(): React.ReactElement {
       color={["white", "white", "black", "black"]}
     >
       <Flex align="center">
-        <Heading as="h6" size="lg">
+        <Heading as="h6" size="lg" colorScheme="orange">
           <Link href="/">Wallet Manager</Link>
         </Heading>
       </Flex>
