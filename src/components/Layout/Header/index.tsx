@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons"
-import { Box, Flex, Text, TextProps, Heading, Button, useColorMode, useBoolean } from "@chakra-ui/react"
+import { Box, Flex, Text, TextProps, Heading, Button, useColorMode, useBoolean, IconButton } from "@chakra-ui/react"
 import { ConnectWalletButton } from "src/components/ConnectWalletButton"
 import { useWalletProviderStore } from "src/stores/walletProvider"
 import { shortenText } from "src/utils/strings"
@@ -39,7 +39,7 @@ function Header(): React.ReactElement {
       color={["white", "white", "black", "black"]}
     >
       <Flex align="center">
-        <Heading as="h6" size="lg" colorScheme="orange">
+        <Heading as="h6" size="lg">
           <Link href="/">Wallet Manager</Link>
         </Heading>
       </Flex>
@@ -77,9 +77,12 @@ function Header(): React.ReactElement {
             )}
           </NavItem>
           <NavItem isLast>
-            <Button size="sm" aria-label="Change color theme" onClick={toggleColorMode}>
-              {lightMode ? <MoonIcon /> : <SunIcon />}
-            </Button>
+            <IconButton
+              size="sm"
+              aria-label="Change color theme"
+              onClick={toggleColorMode}
+              icon={lightMode ? <MoonIcon /> : <SunIcon />}
+            />
           </NavItem>
         </Flex>
       </Box>

@@ -25,9 +25,14 @@ const extendedTheme = extendTheme({
   },
   components: {
     Text: {
-      baseStyle: {
-        color: mode("orange.500", "orange.50"),
-      },
+      baseStyle: (properties) => ({
+        color: mode("gray.900", "gray.50")(properties),
+      }),
+    },
+    Heading: {
+      baseStyle: (properties) => ({
+        color: mode("gray.900", "gray.50")(properties),
+      }),
     },
   },
 })
