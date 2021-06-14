@@ -11,7 +11,7 @@ function LoadPage(): React.ReactElement {
   const [validating, setValidating] = React.useState(false)
   const router = useRouter()
 
-  const onSubmit = async (event: React.FormEvent<Element>) => {
+  const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     setError("")
     setValidating(true)
