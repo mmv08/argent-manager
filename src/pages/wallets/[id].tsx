@@ -2,13 +2,18 @@ import React from "react"
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next"
 import { useRouter } from "next/router"
 import { getAlchemyProvider } from "src/api/rpcProviders"
-import { resolveAddress } from "src/api/ens"
+import { resolveAddress, isValidEnsName } from "src/api/ens"
 import { isValidAddress } from "src/utils/addresses"
-import { isValidEnsName } from "src/utils/ens"
+import { getWalletOwner } from "src/contracts/v2.5.0/api/wallet"
 import { isArgentWallet } from "src/contracts/v2.5.0/api/walletDetector"
 import { WalletCard } from "src/components/pages/wallets/WalletCard"
 
-function WalletPage(): React.ReactElement {
+type ServerSideProperties = {
+  owner: string
+}
+
+function WalletPage(properties: ServerSideProperties): React.ReactElement {
+  const { owner } = properties
   const {
     query: { id },
   } = useRouter()
@@ -16,6 +21,7 @@ function WalletPage(): React.ReactElement {
   return (
     <div>
       <WalletCard address={id as string} />
+      {owner}
     </div>
   )
 }
@@ -23,7 +29,7 @@ function WalletPage(): React.ReactElement {
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
-): Promise<GetServerSidePropsResult<unknown>> {
+): Promise<GetServerSidePropsResult<ServerSideProperties>> {
   try {
     const provider = getAlchemyProvider()
     let walletId = context.query.id as string
@@ -54,8 +60,9 @@ export async function getServerSideProps(
       }
     }
 
+    const owner = await getWalletOwner(provider, walletId)
     return {
-      props: {},
+      props: { owner },
     }
   } catch {
     return {

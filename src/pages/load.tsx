@@ -2,9 +2,9 @@ import React from "react"
 import { useRouter } from "next/router"
 import { Flex, Center, Input, Heading, Button, Text } from "@chakra-ui/react"
 import { isArgentWallet } from "src/contracts/v2.5.0/api/walletDetector"
+import { isValidEnsName } from "src/api/ens"
 import { getAlchemyProvider } from "src/api/rpcProviders"
 import { isValidAddress } from "src/utils/addresses"
-import { isValidEnsName } from "src/utils/ens"
 
 function LoadPage(): React.ReactElement {
   const [error, setError] = React.useState("")

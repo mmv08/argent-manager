@@ -6,4 +6,8 @@ async function resolveAddress(provider: ethers.providers.BaseProvider, name: str
   return address
 }
 
-export { resolveAddress }
+function isValidEnsName(name: string): boolean {
+  return /^([\w-]+\.)+(eth|xyz)$/.test(name)
+}
+
+export { resolveAddress, isValidEnsName }
